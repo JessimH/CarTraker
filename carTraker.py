@@ -40,7 +40,12 @@ while True:
     cv2.imshow('Car detector', frame)
 
     # ne se ferme pas automatiquement (va attendre ici dan le code qu'une key soit préssé)
-    cv2.waitKey(1) #1milisecond
+    key = cv2.waitKey(1) #1milisecond
+
+    if key==81 or key==113:
+        break
+
+video.release()
 
 
 '''
@@ -68,5 +73,3 @@ cv2.imshow('Car detector', img)
 #ne se ferme pas automatiquement (va attendre ici dan le code qu'une key soit préssé)
 cv2.waitKey()
 '''
-
-print('code completed')
