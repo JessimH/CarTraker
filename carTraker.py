@@ -24,10 +24,14 @@ while True:
     # détection de voitures
     cars = car_tracker.detectMultiScale(grayscaled_frame)
 
-    print(cars)
+    #print(cars)
+
+    # Dessin des rectangles sur les voitures détécté
+    for (x, y, w, h) in cars:
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 3)
 
     # affichage de la frame
-    cv2.imshow('Car detector', grayscaled_frame)
+    cv2.imshow('Car detector', frame)
 
     # ne se ferme pas automatiquement (va attendre ici dan le code qu'une key soit préssé)
     cv2.waitKey(1) #1milisecond
@@ -54,7 +58,7 @@ for (x, y, w, h) in cars:
 
 
 #affichage de l'image
-cv2.imshow('Car detector', black_n_white_image)
+cv2.imshow('Car detector', img)
 
 #ne se ferme pas automatiquement (va attendre ici dan le code qu'une key soit préssé)
 cv2.waitKey()
