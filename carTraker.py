@@ -2,10 +2,28 @@ import cv2
 
 #Notre image
 img_file = 'Car Image.jpeg'
+video = cv2.VideoCapture('Tesla Dashcam Accident.mp4')
 
 #Notre Classifieur de Voiture préentrainé
 classifier_file = 'car_detector.xml'
 
+#faire tourner indéfiniment jusqu'a ce que la voiture stop ou se crash ou jsp ^^
+while True:
+    #lire chaque image de la videa 1 a 1
+    (read_successful, frame) = video.read()
+
+    if read_successful:
+        #change la couleur du frame en noir et blanc
+        grayscaled_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    else:
+        break
+    # affichage de la frame
+    cv2.imshow('Car detector', grayscaled_frame)
+
+    # ne se ferme pas automatiquement (va attendre ici dan le code qu'une key soit préssé)
+    cv2.waitKey(1) #1milisecond
+
+'''
 #creation d'une image opencv
 img = cv2.imread(img_file)
 
@@ -30,4 +48,6 @@ cv2.imshow('Car detector', black_n_white_image)
 
 #ne se ferme pas automatiquement (va attendre ici dan le code qu'une key soit préssé)
 cv2.waitKey()
+'''
+
 print('code completed')
