@@ -1,8 +1,9 @@
 import cv2
 
-#Notre image
+#Notre image ou video
 img_file = 'Car Image.jpeg'
-video = cv2.VideoCapture('Tesla Dashcam Accident.mp4')
+#video = cv2.VideoCapture('Tesla Dashcam Accident.mp4')
+video = cv2.VideoCapture('Dashcam Pedestrian.mp4')
 
 #Notre Classifieur de Voiture préentrainé
 classifier_file = 'car_detector.xml'
@@ -55,7 +56,6 @@ cars = car_tracker.detectMultiScale(black_n_white_image)
 #Dessin des rectangles sur les voitures détécté
 for (x, y, w, h) in cars:
     cv2.rectangle(img, (x,y), (x+w, y+h), (0, 0, 255), 2)
-
 
 #affichage de l'image
 cv2.imshow('Car detector', img)
