@@ -5,11 +5,13 @@ img_file = 'Car Image.jpeg'
 #video = cv2.VideoCapture('Tesla Dashcam Accident.mp4')
 video = cv2.VideoCapture('Dashcam Pedestrian.mp4')
 
-#Notre Classifieur de Voiture préentrainé
-classifier_file = 'car_detector.xml'
+#Notre Classifieur de Voiture et piétons préentrainé
+car_tracker_file = 'car_detector.xml'
+pedestrian_tracker_file = 'haarcascade_fullbody.xml'
 
-#création de la classification de voitures
-car_tracker = cv2.CascadeClassifier(classifier_file)
+#création de la classification de voitures et piétons
+car_tracker = cv2.CascadeClassifier(car_tracker_file)
+pedestrian_tracker = cv2.CascadeClassifier(pedestrian_tracker_file )
 
 #faire tourner indéfiniment jusqu'a ce que la voiture stop ou se crash ou jsp ^^
 while True:
@@ -22,14 +24,17 @@ while True:
     else:
         break
 
-    # détection de voitures
+    # détection de voitures et piétons
     cars = car_tracker.detectMultiScale(grayscaled_frame)
+    pedestrians = pedestrian_tracker.detectMultiScale(grayscaled_frame)
 
     #print(cars)
 
     # Dessin des rectangles sur les voitures détécté
     for (x, y, w, h) in cars:
-        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 3)
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 2)
+    for (x, y, w, h) in pedestrians:
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 255), 2)
 
     # affichage de la frame
     cv2.imshow('Car detector', frame)
